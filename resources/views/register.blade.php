@@ -19,6 +19,8 @@
 
         <button type="submit">SUBMIT</button>
         </form>
+        {{-- <p>already have an account? <a href="">LOG IN</a></p> --}}
+        <p>already have an account? <a href="{{ url('/login') }}">LOG IN</a></p>
     </div>
 </body>
 </html>
