@@ -10,11 +10,11 @@ class ShowController extends Controller
     // public function showlogin() {
     //     return redirect('/');
     // }
-    public function showLogin()
+  public function showLogin()
 {
-    // If user is already logged in, redirect to dashboard
+    // Check if user is already logged in
     if (Auth::check()) {
-        return redirect('/dashboard');
+        return redirect()->route('dashboard');
     }
     
     return view('login');

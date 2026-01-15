@@ -5,7 +5,7 @@ use App\Http\Controllers\ShowController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
-    return view('register');
+    return view('login');
 });
 
 // Route::post('/register', function(){
@@ -30,13 +30,57 @@ Route::get('/', function () {
 // })->name('dashboard');
 
 // Login routes - only accessible to guests (not logged in users)
-Route::middleware(['guest'])->group(function () {
-    Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/', [AuthController::class, 'login'])->name('login.post');
-});
+// Route::middleware(['guest'])->group(function () {
+//     Route::get('/login', [ShowController::class, 'showLogin'])->name('login');
+//     Route::post('/loginform', [UserController::class, 'loginform'])->name('login.post');
+//     Route::get('/register', [ShowController::class, 'showRegister'])->name('register');
+//     Route::post('/registerform', [UserController::class, 'register'])->name('register.post');
+// });
 
-// Dashboard routes - only accessible to authenticated users
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// // Dashboard routes - only accessible to authenticated users
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/loginform', [UserController::class, 'loginform'])->name('dashboard');
+//     //  Route::post('/loginform', [UserController::class, 'login'])->name('login.post');
+//     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+// });
+
+// day 3 wow 
+
+// para sa lahat 
+Route::middleware(['guest'])->group(function() {
+
+// get - shwo the form boi
+// post - fill up the form  
+
+    // go to register form 
+    Route::get('/register', [ShowController::class, 'showRegister'])->name('register');
+    //fill up the reg form
+    Route::post('/register', [UserController::class, 'register'])->name('register.post');
+    
+    // go to login form 
+    Route::get('/login', [ShowController::class, 'showLogin'])->name('login');
+    //fill up the login form
+    Route::post('/login', [UserController::class, 'loginform'])->name('login.post');
+
+}); 
+
+// after mag login 
+// bawal ang post sa loob ng auth 
+Route::middleware(['auth'])->group(function() {
+
+    // para sa dashboard 
+    Route::get('/dashboard', function() {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+    // Optional: Redirect root
+    Route::get('/', function() {
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    }
+    return redirect()->route('login');
+    });
+
 });

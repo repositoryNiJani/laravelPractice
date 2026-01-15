@@ -10,7 +10,7 @@
     
     <div>
         <h1>REGISTER</h1>
-        <form action="/register" method="POST">
+        <form action="{{route('register.post')}}" method="POST">
             @csrf
         <input type="text" placeholder="name" name="username" placeholder="name">
         <input type="email" placeholder="email" name="email" placeholder="email">
@@ -20,7 +20,7 @@
         <button type="submit">SUBMIT</button>
         </form>
         {{-- <p>already have an account? <a href="">LOG IN</a></p> --}}
-        <p>already have an account? <a href="{{ url('/login') }}">LOG IN</a></p>
+        <p>already have an account? <a href="{{route('login')}}">LOG IN</a></p>
     </div>
 </body>
 </html>

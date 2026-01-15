@@ -25,11 +25,12 @@ class UserController extends Controller
        ]);
 
        $registerfill['password'] = bcrypt($registerfill['password']);
-    //    User::create($registerfill);
-       $user = User::create($registerfill);
-       auth()->login($user);
-       return redirect('/login');
-    //    return view('/login');
+ 
+    //    $user = User::create($registerfill);
+    //    auth()->login($user);
+    //    return redirect('/login');
+    //    return view('login');
+    return redirect()->route('login')->with('success', 'Registration successful! Please login.');
     }
 
     // public function logout() {
@@ -37,14 +38,23 @@ class UserController extends Controller
     //     return redirect('/login');
     // }
 
-    public function logout(Request $request)
-{
-    Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
+//     public function logout(Request $request)
+// {
+//     Auth::logout();
+//     $request->session()->invalidate();
+//     $request->session()->regenerateToken();
     
-    // Redirect to login page (GET request)
-    return redirect()->route('login'); // Make sure 'login' route uses GET
+//     // Redirect to login page (GET request)
+//     return redirect()->route('login.submit'); // Make sure 'login' route uses GET
+// }
+
+public function logout(Request $request)
+{
+    Auth::logout();              // 1. Log out the user
+    $request->session()->invalidate();  // 2. Invalidate the session
+    $request->session()->regenerateToken(); // 3. Regenerate CSRF token
+    
+    return redirect()->route('login'); // 4. Redirect to login
 }
 
    //  public function login(Request $request) {
@@ -65,7 +75,7 @@ class UserController extends Controller
    //  }
 
    // In your AuthController.php
-public function login(Request $request)
+public function loginform(Request $request)
 {
     $credentials = $request->validate([
         'loginusername' => 'required', // Note: using loginusername from your form
