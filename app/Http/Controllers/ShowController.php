@@ -23,5 +23,13 @@ class ShowController extends Controller
 public function showRegister() {
     return view('register');
 }
+
+public function dashboardAcc() {
+     $user = auth()->user();
+
+    return view('dashboard', [
+        'user' => $user
+    ]);
+}
 }
 

@@ -4,9 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\UserController;
 
-Route::get('/', function () {
-    return view('login');
-});
+// Route::get('/', function () {
+//    $account = Post::where('username', auth()->id())->get();
+//     return view('dashaboard', ['username'=> $account,
+//     // 'bday' => $bday,
+//     // 'email' => $email,
+//     ]);
+// });
 
 // Route::post('/register', function(){
 //     return 'wow';
@@ -62,6 +66,11 @@ Route::middleware(['guest'])->group(function() {
     //fill up the login form
     Route::post('/login', [UserController::class, 'loginform'])->name('login.post');
 
+    // unang makikita ng guest
+    Route::get('/', function () {
+    return view('login');
+    }); 
+
 }); 
 
 // after mag login 
@@ -69,9 +78,20 @@ Route::middleware(['guest'])->group(function() {
 Route::middleware(['auth'])->group(function() {
 
     // para sa dashboard 
+    // Route::get('/dashboard', function() {
+    //     return view('dashboard');
+    // })->name('dashboard');
+
+    // dashboard ng user na may data
     Route::get('/dashboard', function() {
-        return view('dashboard');
-    })->name('dashboard');
+        $user = auth()->user();
+
+        return view('dashboard', [
+            'user' => $user
+        ]);
+    })->name('dashboard'); 
+
+    Route::get('dashboard', [ShowController::class, 'dashboardAcc'])->name('dashboard');
 
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
