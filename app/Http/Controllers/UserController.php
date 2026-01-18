@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\UserPreference;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
@@ -94,6 +95,21 @@ public function loginform(Request $request)
     return back()->withErrors([
         'loginusername' => 'Invalid credentials.',
     ]);
+}
+
+
+public function saveColor(Request $request) {
+    $color = $request->validate([
+        'color' => 'required|in:red,yellow,blue,green',
+    ]);
+     $userId = Auth::user()->username; // Make sure user is logged 
+
+
+     UserPreference::updateOrCreate(
+            ['username' => $userId], // Find by user_id
+            ['color' => $color['color']] // Update or create with this data
+        );
+         return back()->with('success', 'Color preference saved!');
 }
 
 }

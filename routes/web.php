@@ -93,6 +93,8 @@ Route::middleware(['auth'])->group(function() {
 
     Route::get('dashboard', [ShowController::class, 'dashboardAcc'])->name('dashboard');
 
+    Route::post('/color', [UserController::class, 'saveColor'])->name('color.save');
+
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
     // Optional: Redirect root
