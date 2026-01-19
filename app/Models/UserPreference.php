@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserPreference extends Model
 {
     protected $table = 'user_preference';
-     protected $fillable = ['username', 'color'];
+     protected $fillable = ['username', 'color', 'cake'];
     
     // Relationship to User
     public function user()

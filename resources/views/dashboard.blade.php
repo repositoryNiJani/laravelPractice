@@ -89,6 +89,35 @@
         
         <button type="submit">Save Color</button>
     </form>
+
+    <br>
+
+    <form action="{{route('cake.save')}}" method="POST">
+         @csrf
+        <label for="">
+            <input type="radio" name="cake" value="mocha"
+            {{old('cake', Auth::user()->preference->cake ?? '') == 'mocha' ? 'checked' : ''}}>
+            MOCHA
+        </label>
+
+         <label for="">
+            <input type="radio" name="cake" value="choco"
+            {{old('cake', Auth::user()->preference->cake ?? '') == 'choco' ? 'checked' : ''}}>
+            CHOCO
+        </label>
+
+        <button type="submit">Save Cake</button>
+    </form>
+
+<br>
+    <form action="gift.save" method="POST">
+        @csrf
+        <label for="">GIFT: 
+            <input type="text" name="gift" placeholder="GIFT">
+        </label>
+        <button type="submit">SAVE</button>
+    </form>
+
 </div>
 
         <br>

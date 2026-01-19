@@ -97,7 +97,7 @@ public function loginform(Request $request)
     ]);
 }
 
-
+// color 
 public function saveColor(Request $request) {
     $color = $request->validate([
         'color' => 'required|in:red,yellow,blue,green',
@@ -111,5 +111,19 @@ public function saveColor(Request $request) {
         );
          return back()->with('success', 'Color preference saved!');
 }
+
+// cake 
+public function saveCake(Request $request) {
+    $cake = $request->validate([
+        'cake' => 'required|in:mocha,choco',
+    ]);
+    $userId = Auth::user()->username;
+
+    UserPreference::updateOrCreate(
+        ['username' => $userId],
+        ['cake' => $cake['cake']]
+    );
+    return back()->with('success', 'Cake preference saved!');
+} 
 
 }
