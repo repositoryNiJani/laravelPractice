@@ -99,6 +99,7 @@ Route::middleware(['auth'])->group(function() {
 
     // Route::post('/cake', [UserController::class, 'saveCake'])->name('cake.save');
 
+    Route::post('/gift', [UserController::class, 'saveGift'])->name('gift.save');
 
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 

@@ -110,10 +110,10 @@
     </form>
 
 <br>
-    <form action="gift.save" method="POST">
+    <form action="{{route('gift.save')}}" method="POST">
         @csrf
         <label for="">GIFT: 
-            <input type="text" name="gift" placeholder="GIFT">
+            <input type="text" name="gift" value="{{ old('gift', Auth::user()->giftPreference->gift ?? '') }}" placeholder="GIFT">
         </label>
         <button type="submit">SAVE</button>
     </form>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\GiftPreference;
 use App\Models\UserPreference;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -26,11 +27,15 @@ class UserController extends Controller
        ]);
 
        $registerfill['password'] = bcrypt($registerfill['password']);
+    // $registerfill['password']=Hash::make($registerfill['password']);
  
     //    $user = User::create($registerfill);
     //    auth()->login($user);
     //    return redirect('/login');
     //    return view('login');
+
+   User::create($registerfill);
+
     return redirect()->route('login')->with('success', 'Registration successful! Please login.');
     }
 
@@ -125,5 +130,18 @@ public function saveCake(Request $request) {
     );
     return back()->with('success', 'Cake preference saved!');
 } 
+
+public function saveGift(Request $request) {
+    $gift = $request->validate([
+        'gift' => ['required', 'max:50'],
+    ]);
+    $userId = Auth::user()->username;
+
+    GiftPreference::updateOrCreate(
+        ['username' => $userId],
+        ['gift' => $gift['gift']]
+    );
+     return back()->with('success', 'Gift preference saved!');
+}
 
 }
