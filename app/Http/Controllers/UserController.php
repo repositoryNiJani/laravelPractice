@@ -144,4 +144,18 @@ public function saveGift(Request $request) {
      return back()->with('success', 'Gift preference saved!');
 }
 
+public function deleteItem(Request $request) {
+    $user = Auth::user();
+
+    if($request->has('delete_gift')&& $user->Giftpreference) {
+          $user->Giftpreference->update(['gift' => null]);
+           return back()->with('success', 'Gift deleted!');
+    }
+
+     if($request->has('delete_cake')&& $user->preference) {
+          $user->preference->update(['cake' => null]);
+           return back()->with('success', 'Cake deleted!');
+    }
+}
+
 }

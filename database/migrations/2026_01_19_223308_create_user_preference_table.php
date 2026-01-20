@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('user_preference', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('username');
-            $table->string('color')->nullable();
-            // $table->string('cake')->nullable();
-            // $table->string('flower')->nullable();
-
+            $table->string('username');
+            $table->foreign('username')->references('username')->on('users');
+            $table->string('color');
+            $table->string('cake');
+            $table->string('flower');
         });
     }
 

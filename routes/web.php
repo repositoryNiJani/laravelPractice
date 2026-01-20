@@ -96,6 +96,7 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/color', [UserController::class, 'saveColor'])->name('color.save');
 
      Route::post('/cake', [UserController::class, 'saveCake'])->name('cake.save');
+     Route::post('/delete', [UserController::class, 'deleteItem'])->name('delete.item');
 
     // Route::post('/cake', [UserController::class, 'saveCake'])->name('cake.save');
 

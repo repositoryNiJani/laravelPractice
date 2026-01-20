@@ -49,6 +49,11 @@ class User extends Authenticatable
 
      public function preference()
     {
-        return $this->hasOne(UserPreference::class, 'username'); // or 'username' depending on your setup
+        return $this->hasOne(UserPreference::class, 'username', 'username'); // or 'username' depending on your setup
+    }
+
+    public function Giftpreference()
+    {
+        return $this->hasOne(GiftPreference::class, 'username', 'username'); // or 'username' depending on your setup
     }
 }

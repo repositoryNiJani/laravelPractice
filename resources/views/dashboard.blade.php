@@ -18,6 +18,9 @@
     <title>Dashboard</title>
 </head>
 <body>
+
+    <h1>LARAVEL PRAACTICE BASIC CRUD</h1>
+    <p>JANI</p>
     <div>
         <h1>Welcome to Dashboard!</h1>
         <p>You are logged in!</p>
@@ -47,7 +50,25 @@
         <p>Email: <span>{{ Auth::user()->email }}</span></p>
         <p>Birthdate: <span>{{ Auth::user()->bday }}</span></p>   
         {{-- <p>Color: <span>{{ Auth::UserPreference()->color }}</p> --}}
-            <p>Color: <span>{{ Auth::user()->preference->color ?? 'No color selected' }}</span></p>
+        <p>Color: <span>{{ Auth::user()->preference->color ?? 'No color selected' }}</span></p>
+        {{-- <p>Cake: <span>{{ Auth::user()->preference->cake ?? 'No color selected' }}</span></p> --}}
+
+
+             <form action="{{route('delete.item')}}" method="POST">
+        @csrf
+            <p>Cake: <span>{{ Auth::user()->preference->cake ?? 'No cake boi' }}</span>
+              <button type="submit" name="delete_cake" value="1">DELETE</button>
+        </p>
+       </form>
+
+
+       <form action="{{route('delete.item')}}" method="POST">
+        @csrf
+         <p>Gift: <span>{{ Auth::user()->Giftpreference->gift ?? 'No selected' }}</span>
+             <button type="submit" name="delete_gift" value="1">DELETE</button>
+        </p>
+       </form>
+
         
         
        <div>
